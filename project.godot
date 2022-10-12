@@ -15,6 +15,10 @@ run/main_scene="res://src/game_manager.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Events="*res://src/autoloads/events.gd"
+
 [display]
 
 window/size/viewport_width=960

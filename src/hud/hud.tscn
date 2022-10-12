@@ -1,0 +1,158 @@
+[gd_scene load_steps=3 format=3 uid="uid://b47mqy55vbnbk"]
+
+[ext_resource type="Script" path="res://src/hud/hud.gd" id="1_xlc6b"]
+[ext_resource type="Script" path="res://src/hud/new_game.gd" id="2_5gpdr"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_xlc6b")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="Control" parent="Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v" type="VBoxContainer" parent="Menu/MainMenu"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = 256.0
+offset_bottom = -20.0
+grow_vertical = 2
+alignment = 2
+
+[node name="ContinueGame" type="Button" parent="Menu/MainMenu/v"]
+layout_mode = 2
+offset_top = 384.0
+offset_right = 224.0
+offset_bottom = 415.0
+text = "ContinueGame"
+
+[node name="NewGame" type="Button" parent="Menu/MainMenu/v"]
+layout_mode = 2
+offset_top = 419.0
+offset_right = 224.0
+offset_bottom = 450.0
+text = "NewGame"
+
+[node name="Options" type="Button" parent="Menu/MainMenu/v"]
+layout_mode = 2
+offset_top = 454.0
+offset_right = 224.0
+offset_bottom = 485.0
+text = "Options"
+
+[node name="Quit" type="Button" parent="Menu/MainMenu/v"]
+layout_mode = 2
+offset_top = 489.0
+offset_right = 224.0
+offset_bottom = 520.0
+text = "Quit"
+
+[node name="NewGame" type="Control" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5gpdr")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Menu/NewGame"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "NewGame"
+
+[node name="MapPreview" type="TextureRect" parent="Menu/NewGame"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 384.0
+offset_bottom = 256.0
+
+[node name="Randomize" type="Button" parent="Menu/NewGame"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 264.0
+offset_right = 128.0
+offset_bottom = 295.0
+text = "Randomize"
+
+[node name="Difficulty" type="Label" parent="Menu/NewGame"]
+offset_left = 8.0
+offset_top = 304.0
+offset_right = 288.0
+offset_bottom = 360.0
+text = "Difficulty: "
+
+[node name="Seed" type="TextEdit" parent="Menu/NewGame"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 264.0
+offset_right = 288.0
+offset_bottom = 296.0
+placeholder_text = "Seed"
+
+[node name="Back" type="Button" parent="Menu/NewGame"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 488.0
+offset_right = 256.0
+offset_bottom = 519.0
+text = "Back"
+
+[node name="Start" type="Button" parent="Menu/NewGame"]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 488.0
+offset_right = 936.0
+offset_bottom = 519.0
+text = "Start"
+
+[node name="Options" type="Control" parent="Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Menu/Options"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Options"
+
+[node name="Back" type="Button" parent="Menu/Options"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 488.0
+offset_right = 256.0
+offset_bottom = 519.0
+text = "Back"
+
+[connection signal="button_up" from="Menu/MainMenu/v/ContinueGame" to="." method="_on_continue_game_button_up"]
+[connection signal="button_up" from="Menu/MainMenu/v/NewGame" to="." method="_on_new_game_button_up"]
+[connection signal="button_up" from="Menu/MainMenu/v/Options" to="." method="_on_options_button_up"]
+[connection signal="button_up" from="Menu/MainMenu/v/Quit" to="." method="_on_quit_button_up"]
+[connection signal="button_up" from="Menu/NewGame/Randomize" to="Menu/NewGame" method="_on_randomize_button_up"]
+[connection signal="text_changed" from="Menu/NewGame/Seed" to="Menu/NewGame" method="_on_seed_text_changed"]
+[connection signal="button_up" from="Menu/NewGame/Back" to="." method="_on_back_button_up"]
+[connection signal="button_up" from="Menu/NewGame/Start" to="Menu/NewGame" method="_on_start_button_up"]
+[connection signal="button_up" from="Menu/Options/Back" to="." method="_on_back_button_up"]

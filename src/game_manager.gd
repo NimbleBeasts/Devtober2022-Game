@@ -11,7 +11,7 @@ var gradient_limits = [0.8, 0.9, 0.8]
 
 var random_value = 0
 
-func _create_map(seed: int) -> Dictionary:
+func create_map(seed: int) -> Dictionary:
 	var world_noise = FastNoiseLite.new()
 	world_noise.set_noise_type(FastNoiseLite.TYPE_PERLIN  )
 	world_noise.set_frequency(0.1)
@@ -80,7 +80,7 @@ func _create_map(seed: int) -> Dictionary:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
-	_create_map(123)
+	create_map(123)
 	
 	$Window/LimitBottom.value = gradient_limits[0]
 	$Window/LimitTop.value = gradient_limits[1]
@@ -89,7 +89,7 @@ func _ready():
 
 func _on_button_button_up():
 	random_value = rng.randi()
-	_create_map(random_value)
+	create_map(random_value)
 
 
 
@@ -102,19 +102,19 @@ func _on_toggle_button_up():
 
 func _on_scale_slider_value_changed(value):
 	NOISE_SCALE = $Window/ScaleSlider.value
-	_create_map(random_value)
+	create_map(random_value)
 
 
 func _on_limit_bottom_value_changed(value):
 	gradient_limits[0] = $Window/LimitBottom.value
-	_create_map(random_value)
+	create_map(random_value)
 
 
 func _on_limit_top_value_changed(value):
 	gradient_limits[1] = $Window/LimitTop.value
-	_create_map(random_value)
+	create_map(random_value)
 
 
 func _on_limit_forest_value_changed(value):
 	gradient_limits[2] = $Window/LimitForest.value
-	_create_map(random_value)
+	create_map(random_value)
