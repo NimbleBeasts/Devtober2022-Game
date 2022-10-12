@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=3 uid="uid://fyjflm5r1nis"]
+
+[ext_resource type="Script" path="res://src/game_manager.gd" id="1_6ukgd"]
+[ext_resource type="Texture2D" uid="uid://6edax30u3mmg" path="res://assets/tileset/tileset.png" id="2_11lpb"]
+[ext_resource type="Texture2D" uid="uid://ccyfj2te6okms" path="res://assets/tileset/grid.png" id="3_tp34e"]
+[ext_resource type="PackedScene" uid="uid://b47mqy55vbnbk" path="res://src/hud/hud.tscn" id="4_yev72"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nvk28"]
+texture = ExtResource("2_11lpb")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1ciqp"]
+sources/0 = SubResource("TileSetAtlasSource_nvk28")
+
+[node name="GameManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ukgd")
+
+[node name="TileMap" type="TileMap" parent="."]
+visible = false
+texture_filter = 1
+tile_set = SubResource("TileSet_1ciqp")
+format = 2
+
+[node name="Grid" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tp34e")
+stretch_mode = 1
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 40.0
+offset_top = 232.0
+offset_right = 135.0
+offset_bottom = 263.0
+text = "Randomize"
+
+[node name="Window" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScaleSlider" type="HSlider" parent="Window"]
+offset_left = 24.0
+offset_top = 280.0
+offset_right = 272.0
+offset_bottom = 304.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="LimitBottom" type="HSlider" parent="Window"]
+offset_left = 24.0
+offset_top = 312.0
+offset_right = 272.0
+offset_bottom = 328.0
+max_value = 1.5
+step = 0.1
+
+[node name="LimitTop" type="HSlider" parent="Window"]
+offset_left = 24.0
+offset_top = 336.0
+offset_right = 272.0
+offset_bottom = 352.0
+max_value = 1.5
+step = 0.1
+
+[node name="LimitForest" type="HSlider" parent="Window"]
+offset_left = 24.0
+offset_top = 360.0
+offset_right = 272.0
+offset_bottom = 376.0
+max_value = 1.5
+step = 0.1
+
+[node name="Info" type="RichTextLabel" parent="Window"]
+offset_left = 16.0
+offset_top = 384.0
+offset_right = 280.0
+offset_bottom = 504.0
+
+[node name="Sprite2d" type="Sprite2D" parent="Window"]
+texture_filter = 1
+scale = Vector2(8, 8)
+centered = false
+
+[node name="Toggle" type="Button" parent="."]
+offset_top = 232.0
+offset_right = 24.0
+offset_bottom = 263.0
+text = "i"
+
+[node name="Hud" parent="." instance=ExtResource("4_yev72")]
+gm_ref = NodePath("..")
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="value_changed" from="Window/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
+[connection signal="value_changed" from="Window/LimitBottom" to="." method="_on_limit_bottom_value_changed"]
+[connection signal="value_changed" from="Window/LimitTop" to="." method="_on_limit_top_value_changed"]
+[connection signal="value_changed" from="Window/LimitForest" to="." method="_on_limit_forest_value_changed"]
+[connection signal="button_up" from="Toggle" to="." method="_on_toggle_button_up"]
